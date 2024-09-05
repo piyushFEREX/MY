@@ -1,0 +1,93 @@
+.custom-transform-origin1 {
+
+    --transform-origin-x: calc(100vh * 1.1702);
+  --transform-origin-y: calc(100vh * 0.7238);
+    transform-origin: var(--transform-origin-x) var(--transform-origin-y);
+    /* scale:calc(0.618033); */
+    height: 100vh ;
+    width: 100vh ;
+    /* border: .1em solid black; */
+    position: absolute;
+    transition: .5s all;
+    transform-style: preserve-3d;
+    transform: perspective(10000px);
+  }
+  .custom-transform-origin2{
+    height: calc(100vw); 
+    width: calc(100vw);
+    --transform-origin-x: calc(100vw * 0.2772);
+    --transform-origin-y: calc(100vw * 1.1699);
+    transform-origin: var(--transform-origin-x) var(--transform-origin-y);
+    /* Additional styling */
+    /* border: 4px solid black; */
+    position: absolute;
+    transition: 0.5s all;
+  }
+
+  /* In your CSS file or style block */
+@font-face {
+  font-family: 'MyFontFamily';
+  src: url('../assets\Quicksand-Bold.ttf') format('truetype');
+  /* You can add additional font formats and styles here if needed */
+}
+
+.customFont {
+  font-family: 'MyFontFamily', sans-serif;
+}
+
+/* Linear gradient animation */
+.AnimatorGradient {
+  background: linear-gradient(135deg, #6a11cb, #2575fc, #ff6f61, #ffcc70);
+  background-size: 300% 300%;
+  animation: GradientAnimation 20s ease infinite;
+}
+
+@keyframes GradientAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* Glassmorphism Styles */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Blur effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border to enhance frosted effect */
+  overflow: hidden; /* Prevent content overflow */
+  padding: 1rem; /* Adjust padding as needed */
+}
+
+/* Optional: Add some animation or gradient to enhance the glassmorphism effect */
+.glassmorphism-gradient {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+  backdrop-filter: blur(15px);
+}
+
+
+
+
+  
+/* .checker{
+  height: 20px;width: 20px;
+  background-color: red;
+  position: absolute;
+  z-index: 999;
+  top:  calc(100vh * 0.);
+  left:  calc(100vh * 1.4699);
+}
+
+  --transform-origin-x: calc(100vh * 1.1702);
+  --transform-origin-y: calc(100vh * 0.7238); */
+
+
+
+  /* old value with width calculation 
+  --transform-origin-x: calc(100vw * 0.618033 * 1.1699);
+  --transform-origin-y: calc(100vw * 0.618033 * 0.7228); */
