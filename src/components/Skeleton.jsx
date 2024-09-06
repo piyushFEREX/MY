@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import './sectionStyle.css';
 import MyContext from '../context/MyContext';
 import Sections from './Sections';
-import VanillaTilt from 'vanilla-tilt';
+import NeumorphicTile from './NeumorphicTile';
 
-const IntroPage = ({ order }) => {
 
-  const tiltRef = useRef(null)
-  const {tiltingStyle, padding, rotator, divSize, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
+const Skeleton = ({ order }) => {
+  const theme = 0;
+
+  const {vibrantColors, padding, rotator, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
   const section = useRef(null);
 
   const iteration = useMemo(() => order + rotator, [order, rotator]);
@@ -23,12 +24,11 @@ const IntroPage = ({ order }) => {
   }, [order, padding, fixedRatio1, iteration]);
 
   useEffect(() => {
-    VanillaTilt.init(tiltRef.current , tiltingStyle)
+    console.log(iteration , rotation ,)
     if (section.current) {
       section.current.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
     }
-    //cleanup for tilt
-    return () => tiltRef.current.vanillaTilt.destroy();
+
   }, [scale, rotation]);
 
   return (
@@ -36,19 +36,22 @@ const IntroPage = ({ order }) => {
       onClick={() => setRotator(order * -1)}
       ref={section}
       style={{ padding: calculatedPadding }}
-      className={` ${rotation < -90 ? 'hidden' : ''} ${MobileScreen ? 'custom-transform-origin2' : 'custom-transform-origin1'}`}
-    >
+      className={`${rotation < -90 ? 'hidden' : ''} ${MobileScreen ? 'custom-transform-origin2' : 'custom-transform-origin1'}`}>
       <Sections />
-      <div 
-      ref={tiltRef}
-      className='glassmorphism -gradient h-full w-full rounded-2xl'>
-        <div className={`${divSize ? 'h-screen' : 'h-full'} ${iteration === order ? 'visible' : 'hidden'} w-full`}>
-          {/* Content here */}
-          <h1>sdfsfjasifjw</h1>
+      <div className='h-full w-full rounded-2xl glassmorphism p-0'>
+        {/* //text on 90deg rotation */}
+        <div className={`${vibrantColors[order]} h-full w-full  flex justify-center items-center rotate-[-90deg] ${rotation > 45 && rotation < 135 ? 'visible' : 'hidden'}`}>
+          <h1 className='text-2xl'>Text Here!</h1>
         </div>
+        {/* //text on 90deg rotation */}
+
+       <NeumorphicTile visible={rotation > 135 && rotation < 225 ? true : false} isLightTheme={theme} size={200}  padding={10}  rotation={180}/>
+        <img className={`${rotation > 225 && rotation < 315 ? 'visible' : 'hidden'} h-full w-full rotate-90 `} src={`public/images/${order-3}.gif`} alt=''></img>
       </div>
     </div>
+
+
   );
 };
 
-export default IntroPage;
+export default Skeleton;

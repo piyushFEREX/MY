@@ -1,13 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import MyContext from './context/MyContext'
-import IntroPage from './components/IntroPage';
-import TechStack from './components/TechStack';
-import Contact from './components/Contact';
-import Projects from './components/Projects';
-import Project1 from './components/Project1';
-import Project2 from './components/project2';
-import Donation from './components/Donation';
 import NavBar from './components/NavBar';
+import Skeleton from './components/Skeleton';
 
 const App = () => {
   const {rotator,setdivSize,MobileScreen,setMobileScreen,setRotator,setOpacity}= useContext(MyContext);
@@ -81,13 +75,13 @@ const App = () => {
 <div className='mainDiv h-screen w-screen overflow-hidden AnimatorGradient text-white relative'>
   {/* <div className={`overflow-hidden bg-red-600 w-screen ${MobileScreen ? 'h-[calc(100vw*1.618033)]' : 'h-[calc(100vw * 0.618033)]'}`}> */}
     <NavBar/>
-    <IntroPage order={0}/>
-    <TechStack order={1}/>
-    <Contact order={2}/>
-    <Projects order={3}/>
-    <Project1 order={4}/>
-    <Project2 order={5}/>
-    <Donation order={6}/>
+    <Skeleton order={0}/>
+    <Skeleton order={1}/>
+    <Skeleton order={2}/>
+    <Skeleton order={3}/>
+    <Skeleton order={4}/>
+    <Skeleton order={5}/>
+    <Skeleton order={6}/>
   </div>
 // </div>
 

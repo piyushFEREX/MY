@@ -6,20 +6,21 @@ const MyContextProvider =({children})=>{
     const [Opacity, setOpacity] = useState(false);
     const [MobileScreen, setMobileScreen] = useState(false)
     const [divSize, setdivSize] = useState(false)
-    // const [borderRadius, setBorderRadius] = useState('0.5rem');
     const fixedRatio1 = 0.618033;
     const padding = .3;
-    const tiltingStyle={
-        reverse:true,
-        max:10,
-        // glare:true,
-        gyroscope:true,
-        
-      };
+    const vibrantColors = [
+        'bg-cyan-400',  // Soft cyan for a smooth gradient
+        'bg-teal-400',  // A touch of teal for depth
+        'bg-pink-400',  // Soft pink for warmth
+        'bg-indigo-400',// A calm indigo for balance
+        'bg-yellow-400',// Gentle yellow for contrast
+        'bg-purple-400',// Light purple for a soothing effect
+        'bg-blue-400'   // Cool blue for a refreshing feel
+      ];
     return(
         <MyContext.Provider
         value={{
-            tiltingStyle,
+            vibrantColors,
             padding,
             rotator,
             fixedRatio1,
