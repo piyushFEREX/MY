@@ -9,13 +9,13 @@ const MyContextProvider =({children})=>{
     const fixedRatio1 = 0.618033;
     const padding = .3;
     const vibrantColors = [
-        'bg-cyan-400',  // Soft cyan for a smooth gradient
-        'bg-teal-400',  // A touch of teal for depth
-        'bg-pink-400',  // Soft pink for warmth
-        'bg-indigo-400',// A calm indigo for balance
+        'bg-red-600',  // Soft cyan for a smooth gradient
+        'bg-sky-400',  // A touch of teal for depth
+        'bg-pink-300',  // Soft pink for warmth
+        'bg-blue-400',// A calm indigo for balance
         'bg-yellow-400',// Gentle yellow for contrast
-        'bg-purple-400',// Light purple for a soothing effect
-        'bg-blue-400'   // Cool blue for a refreshing feel
+        'bg-cyan-400',// Light purple for a soothing effect
+        'bg-indigo-400'   // Cool blue for a refreshing feel
       ];
     return(
         <MyContext.Provider

@@ -46,7 +46,7 @@ const Skeleton = ({ order }) => {
         {/* //text on 90deg rotation */}
 
        <NeumorphicTile visible={rotation > 135 && rotation < 225 ? true : false} isLightTheme={theme} size={200}  padding={10}  rotation={180}/>
-        <img className={`${rotation > 225 && rotation < 315 ? 'visible' : 'hidden'} h-full w-full rotate-90 `} src={`public/images/${order-3}.gif`} alt=''></img>
+        <img className={`${rotation > 225 && rotation < 315 ? 'visible' : 'hidden'} h-full w-full rotate-90 `} src={`public/images/${order-2}.gif`} alt=''></img>
       </div>
     </div>
 

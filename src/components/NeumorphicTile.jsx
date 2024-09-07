@@ -21,7 +21,7 @@ const NeumorphicTile = ({ visible, isLightTheme, size, padding, rotation }) => {
       <div
         style={{
           transform: `rotate(${rotation}deg) scale(${isHovered ? 1.05 : 1})`, // Combine rotation and scaling
-          padding: `${padding}rem`,
+          padding: `${padding*7}px`,
           borderRadius: '50%',
           background: `linear-gradient(145deg, ${backgroundColor}, ${backgroundColor})`,
           boxShadow: isHovered ? boxShadowNormal : boxShadowPressed, // Initially "pressed in" and "popped out" on hover
