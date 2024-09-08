@@ -24,7 +24,7 @@ const Skeleton = ({ order }) => {
   }, [order, padding, fixedRatio1, iteration]);
 
   useEffect(() => {
-    console.log(iteration , rotation ,)
+    // console.log(iteration , rotation ,)
     if (section.current) {
       section.current.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
     }
@@ -45,10 +45,10 @@ const Skeleton = ({ order }) => {
         </div>
         {/* //text on 90deg rotation */}
   {/* next button  */}
-       <NeumorphicTile visible={rotation > 135 && rotation < 225 ? true : false} theme={theme} size={200}  padding={80}  rotation={180} order={order}/>
+       <NeumorphicTile light={0} visible={rotation > 135 && rotation < 225 ? true : false} theme={theme} size={200}  padding={80}  rotation={180} order={order}/>
         {/* next button  */}
         {/* previous button  */}
-        <NeumorphicTile prev={true} visible={rotation > 315 && rotation < 405 ? true : false} theme={theme} size={200}  padding={80}  rotation={180} order={order}/>
+        <NeumorphicTile light={2} prev={true} visible={rotation > 315 && rotation < 405 ? true : false} theme={theme} size={200}  padding={80}  rotation={180} order={order}/>
         {/* previous button  */}
         <img className={`${rotation > 225 && rotation < 315 ? 'visible' : 'hidden'} h-full w-full rotate-90 `} src={`public/images/${order-2}.gif`} alt=''></img>
       </div>

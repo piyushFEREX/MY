@@ -11,7 +11,7 @@ lerna-debug.log*
 # Specific files you mentioned
 package-lock.json
 .eslintrc.*
-public/
+# public/
 vite.config.js
 
 

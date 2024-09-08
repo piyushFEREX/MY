@@ -13,6 +13,7 @@ const App = () => {
   const MAX_LIMIT = 2;
 // console.log(MIN_LIMIT);
   useEffect(() => {
+    // console.log(window.innerHeight , window.innerWidth)
     // console.log(theme , 'from app')
     if(window.innerHeight<window.innerWidth* 0.618033){
       setdivSize(true)
