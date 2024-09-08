@@ -36,11 +36,19 @@
 }
 
 /* Linear gradient animation */
-.AnimatorGradient {
+.AnimatorGradientLight {
   background: linear-gradient(135deg, #6a11cb, #2575fc, #ff6f61, #ffcc70);
   background-size: 300% 300%;
   animation: GradientAnimation 20s ease infinite;
 }
+.AnimatorGradientDark {
+  background: linear-gradient(135deg, #2d3a6f, #4b2d77, #8a2b8c, #e94f6f);
+  background-size: 300% 300%;
+  animation: GradientAnimation 20s ease infinite;
+}
+
+
+
 
 @keyframes GradientAnimation {
   0% {

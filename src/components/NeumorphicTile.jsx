@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { RiArrowDownLine } from '@remixicon/react';
+import MyContext from '../context/MyContext';
 
-const NeumorphicTile = ({ visible, isLightTheme, size, padding, rotation }) => {
-  const [isHovered, setIsHovered] = useState(false);
+const NeumorphicTile = ({prev, visible, theme, size, padding, rotation }) => {
+  const [isHovered, setIsHovered] = useState(true);
+ const {rotator , setRotator}= useContext(MyContext)
+  // useEffect(() => {
+  //   console.log(theme);
+  // }, [theme]);
 
-  const backgroundColor = isLightTheme ? '#f3f4f6' : '#2a2a2a'; // Lighter shade for dark mode
-  const shadowColorDark = isLightTheme ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.5)'; // Deeper shadow for dark mode
-  const shadowColorLight = isLightTheme ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.1)'; // Softer light shadow in dark mode
+  const backgroundColor = theme ? '#f3f4f6' : '#2a2a2a'; 
+  const shadowColorDark = theme ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.5)'; 
+  const shadowColorLight = theme ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.1)'; 
+
+  const neoShadows ={
+    pop:[
+      `10px 10px 20px ${shadowColorDark}, -10px -10px 20px ${shadowColorLight}`,`-10px 10px 20px ${shadowColorDark},10px -10px 20px ${shadowColorLight}`,`-10px -10px 20px ${shadowColorDark},10px 10px 20px ${shadowColorLight}`,` 10px -10px 20px ${shadowColorDark},-10px 10px 20px ${shadowColorLight}`
+    ],
+    push:[
+      `inset 10px 10px 20px ${shadowColorDark}, inset -10px -10px 20px ${shadowColorLight}`,`inset -10px 10px 20px ${shadowColorDark},inset 10px -10px 20px ${shadowColorLight}`,`inset -10px -10px 20px ${shadowColorDark},
+inset 10px 10px 20px ${shadowColorLight}`,`inset 10px -10px 20px ${shadowColorDark},inset -10px 10px 20px ${shadowColorLight}`
+    ]
+  }
 
   // Box-shadow for the "pressed in" look (initial state)
   const boxShadowPressed = `inset 10px 10px 20px ${shadowColorDark}, inset -10px -10px 20px ${shadowColorLight}`;
@@ -16,21 +31,30 @@ const NeumorphicTile = ({ visible, isLightTheme, size, padding, rotation }) => {
 
   return (
     <div
-      className={`${visible ? 'visible' : 'hidden'} h-full w-full flex justify-center items-center ${isLightTheme ? 'bg-gray-100' : 'bg-gray-800'}`}
+      onClick={(e)=>{
+        e.stopPropagation(); 
+        prev ? setRotator(rotator+1) : setRotator(rotator-1)            
+                      }}
+      className={`h-full w-full flex justify-center items-center ${visible ? 'visible' : 'hidden'} ${theme ? 'bg-gray-100' : 'bg-gray-800'}`}
     >
       <div
         style={{
           transform: `rotate(${rotation}deg) scale(${isHovered ? 1.05 : 1})`, // Combine rotation and scaling
-          padding: `${padding*7}px`,
+          // padding: `${padding * 7}px`, 
+          display:'flex',
+          justifyContent:'center',
+          alignItems:'center',
+          height:padding +"%",
+          width:padding +"%",
           borderRadius: '50%',
           background: `linear-gradient(145deg, ${backgroundColor}, ${backgroundColor})`,
           boxShadow: isHovered ? boxShadowNormal : boxShadowPressed, // Initially "pressed in" and "popped out" on hover
           transition: 'box-shadow 0.3s ease, transform 0.3s ease', // Smooth transition for both box-shadow and transform
         }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => setIsHovered(false)}
+        onMouseLeave={() => setIsHovered(true)}
       >
-        <RiArrowDownLine color={isLightTheme ? 'gray' : '#c0c0c0'} size={size} />
+        <RiArrowDownLine color={theme ? 'gray' : '#c0c0c0'} size={size} />
       </div>
     </div>
   );

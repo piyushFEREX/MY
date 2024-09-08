@@ -4,15 +4,16 @@ import NavBar from './components/NavBar';
 import Skeleton from './components/Skeleton';
 
 const App = () => {
-  const {rotator,setdivSize,MobileScreen,setMobileScreen,setRotator,setOpacity}= useContext(MyContext);
+  const {rotator,setdivSize,theme,setMobileScreen,setRotator,setOpacity}= useContext(MyContext);
 
   
   const SCROLL_THRESHOLD = 30;
   const DECIMAL_PLACES = 1;
   const MIN_LIMIT = -7;
-  const MAX_LIMIT = 7;
+  const MAX_LIMIT = 2;
 // console.log(MIN_LIMIT);
   useEffect(() => {
+    // console.log(theme , 'from app')
     if(window.innerHeight<window.innerWidth* 0.618033){
       setdivSize(true)
     }
@@ -72,7 +73,7 @@ const App = () => {
 
 
   return (
-<div className='mainDiv h-screen w-screen overflow-hidden AnimatorGradient text-white relative'>
+<div className={`${theme ? 'AnimatorGradientLight':'AnimatorGradientDark'} mainDiv h-screen w-screen overflow-hidden  text-white relative`}>
   {/* <div className={`overflow-hidden bg-red-600 w-screen ${MobileScreen ? 'h-[calc(100vw*1.618033)]' : 'h-[calc(100vw * 0.618033)]'}`}> */}
     <NavBar/>
     <Skeleton order={0}/>
