@@ -5,7 +5,9 @@ const MyContextProvider =({children})=>{
     const [rotator, setRotator] = useState(0);
     const [Opacity, setOpacity] = useState(false);
     const [MobileScreen, setMobileScreen] = useState(false)
+    const [theme, settheme] = useState(true)
     const [divSize, setdivSize] = useState(false)
+    const [neoTileRotation,setneoTileRotation] = useState()
     const fixedRatio1 = 0.618033;
     const padding = .3;
     const vibrantColors = [
@@ -20,13 +22,17 @@ const MyContextProvider =({children})=>{
     return(
         <MyContext.Provider
         value={{
+            neoTileRotation,
             vibrantColors,
+            theme,
             padding,
             rotator,
             fixedRatio1,
             MobileScreen,
             Opacity,
             divSize,
+            setneoTileRotation,
+            settheme,
             setdivSize,
             setMobileScreen,
             setRotator,

@@ -6,9 +6,9 @@ import NeumorphicTile from './NeumorphicTile';
 
 
 const Skeleton = ({ order }) => {
-  const theme = 0;
 
-  const {vibrantColors, padding, rotator, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
+
+  const {vibrantColors,theme, padding, rotator, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
   const section = useRef(null);
 
   const iteration = useMemo(() => order + rotator, [order, rotator]);
@@ -36,7 +36,7 @@ const Skeleton = ({ order }) => {
       onClick={() => setRotator(order * -1)}
       ref={section}
       style={{ padding: calculatedPadding }}
-      className={`${rotation < -90 ? 'hidden' : ''} ${MobileScreen ? 'custom-transform-origin2' : 'custom-transform-origin1'}`}>
+      className={`${rotation < -90 ? 'hidden' : ''} ${MobileScreen ? 'custom-transform-origin2' : 'custom-transform-origin1 '} `}>
       <Sections />
       <div className='h-full w-full rounded-2xl glassmorphism p-0'>
         {/* //text on 90deg rotation */}
@@ -44,8 +44,12 @@ const Skeleton = ({ order }) => {
           <h1 className='text-2xl'>Text Here!</h1>
         </div>
         {/* //text on 90deg rotation */}
-
-       <NeumorphicTile visible={rotation > 135 && rotation < 225 ? true : false} isLightTheme={theme} size={200}  padding={10}  rotation={180}/>
+  {/* next button  */}
+       <NeumorphicTile visible={rotation > 135 && rotation < 225 ? true : false} theme={theme} size={200}  padding={80}  rotation={180} order={order}/>
+        {/* next button  */}
+        {/* previous button  */}
+        <NeumorphicTile prev={true} visible={rotation > 315 && rotation < 405 ? true : false} theme={theme} size={200}  padding={80}  rotation={180} order={order}/>
+        {/* previous button  */}
         <img className={`${rotation > 225 && rotation < 315 ? 'visible' : 'hidden'} h-full w-full rotate-90 `} src={`public/images/${order-2}.gif`} alt=''></img>
       </div>
     </div>
