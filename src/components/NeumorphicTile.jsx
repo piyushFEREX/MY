@@ -4,8 +4,8 @@ import MyContext from '../context/MyContext';
 
 const NeumorphicTile = ({ light, prev, visible, theme, size, padding, rotation }) => {
   const [isHovered, setIsHovered] = useState(true); // Set initial hover state to false
-  const { rotator, setRotator } = useContext(MyContext);
-
+  const { MobileScreen,rotator, setRotator } = useContext(MyContext);
+  if(MobileScreen) rotation = rotation + 90
   const backgroundColor = theme ? '#f3f4f6' : '#2a2a2a';
   const shadowColorDark = theme ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.5)';
   const shadowColorLight = theme ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.1)';

@@ -8,7 +8,7 @@ import NeumorphicTile from './NeumorphicTile';
 const Skeleton = ({ order }) => {
 
 
-  const {vibrantColors,theme, padding, rotator, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
+  const {vibrantDarkColors,vibrantColors,theme, padding, rotator, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
   const section = useRef(null);
 
   const iteration = useMemo(() => order + rotator, [order, rotator]);
@@ -40,7 +40,7 @@ const Skeleton = ({ order }) => {
       <Sections />
       <div className='h-full w-full rounded-2xl glassmorphism p-0'>
         {/* //text on 90deg rotation */}
-        <div className={`${vibrantColors[order]} h-full w-full  flex justify-center items-center rotate-[-90deg] ${rotation > 45 && rotation < 135 ? 'visible' : 'hidden'}`}>
+        <div className={`${theme ? vibrantColors[order] : vibrantDarkColors[order]} h-full w-full  flex justify-center items-center rotate-[-90deg] ${rotation > 45 && rotation < 135 ? 'visible' : 'hidden'}`}>
           <h1 className='text-2xl'>Text Here!</h1>
         </div>
         {/* //text on 90deg rotation */}
