@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import MyContext from "../context/MyContext";
 
-const Toggle = ({theme}) => {
+const Toggle = ({size}) => {
+  const {theme,settheme}= useContext(MyContext)
+
   return (
-    <StyledWrapper>
+    <StyledWrapper size={size}>
       <label className="theme-switch">
-        <input type="checkbox" className="theme-switch__checkbox" checked={false} />
+        <input type="checkbox" className="theme-switch__checkbox" onClick={()=>settheme(!theme)} checked={!theme} />
         <div className="theme-switch__container">
           <div className="theme-switch__clouds" />
           <div className="theme-switch__stars-container">
@@ -39,7 +42,7 @@ const Toggle = ({theme}) => {
 
 const StyledWrapper = styled.div`
   .theme-switch {
-  --toggle-size: 30px;
+  --toggle-size: ${(props)=> props.size +'px'};
   /* the size is adjusted using font-size,
      this is not transform scale,
      so you can choose any size */
