@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import MyContext from '../context/MyContext'
-// import Toggle from './Toggle'
+import Toggle from './Toggle'
 
 const NavBar = () => {
     const{MobileScreen,theme,settheme}=useContext(MyContext)
@@ -14,8 +14,8 @@ const NavBar = () => {
     className='h-full p-2 z-20 absolute right-0 top-0'>
     <div className='h-full w-full glassmorphism rounded-2xl'>
       {/* theme of it  */}
-       <button className='p-1 bg-red-600 rounded-full' onClick={()=>settheme(!theme)}> theme change kar BKL</button>
-      {/* <Toggle/> */}
+     
+      <Toggle/>
 
     </div>   
      
