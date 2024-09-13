@@ -4,14 +4,21 @@ import NavBar from './components/NavBar';
 import Skeleton from './components/Skeleton';
 
 const App = () => {
-  const { rotator, setdivSize, theme, setMobileScreen, setRotator, setOpacity } = useContext(MyContext);
+  const { rotator, setdivSize,settheme ,  theme, setMobileScreen, setRotator, setOpacity } = useContext(MyContext);
 
   const SCROLL_THRESHOLD = 30;
   const DECIMAL_PLACES = 1;
   const MIN_LIMIT = -7;
   const MAX_LIMIT = 2;
-
+  
+  // Function to detect system theme
+  const detectSystemTheme = () => {
+  const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  settheme(!darkMode);
+  };
+  
   useEffect(() => {
+    detectSystemTheme();
     if (window.innerHeight < window.innerWidth * 0.618033) {
       setdivSize(true);
     }
@@ -19,6 +26,9 @@ const App = () => {
       setMobileScreen(true);
     }
 
+
+
+  // scroll handing function for wheel event
     const handleScroll = (event) => {
       const delta = event.deltaY;
       if (Math.abs(delta) >= SCROLL_THRESHOLD) {

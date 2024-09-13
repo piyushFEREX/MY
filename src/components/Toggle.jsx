@@ -8,7 +8,7 @@ const Toggle = ({size}) => {
   return (
     <StyledWrapper size={size}>
       <label className="theme-switch">
-        <input type="checkbox" className="theme-switch__checkbox" onClick={()=>settheme(!theme)} checked={!theme} />
+        <input type="checkbox" className="theme-switch__checkbox" onChange={()=>settheme(!theme)} checked={!theme} />
         <div className="theme-switch__container">
           <div className="theme-switch__clouds" />
           <div className="theme-switch__stars-container">
