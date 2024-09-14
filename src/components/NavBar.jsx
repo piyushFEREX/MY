@@ -13,8 +13,10 @@ const NavBar = () => {
         position:'absolute',
         top:'calc(100vw * 1.62)',
         width:'100vw', 
-        height:'calc( (100vw * 1.62) - 100vw)'
+        // height:'calc( (100vw * 1.62) - 100vw)'
+        
       }
+
       :
       { 
         height:'100vh',
