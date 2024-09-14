@@ -50,7 +50,7 @@ const Skeleton = ({ order }) => {
         {/* previous button  */}
         <NeumorphicTile light={MobileScreen ? 3 : 0} prev={true} visible={rotation > 315 && rotation < 405 ? true : false} theme={theme} size={200}  padding={80}  rotation={MobileScreen ? 0 : 0} order={order}/>
         {/* previous button  */}
-        <img className={`${rotation > 225 && rotation < 315 ? 'visible' : 'hidden'} h-full w-full rotate-90 `} src={`public/images/${order-2}.gif`} alt=''></img>
+        <img className={`${rotation > 225 && rotation < 315 ? 'visible' : 'hidden'} h-full w-full object-cover rotate-90 `} src={`/images/${order-2}.gif`} alt=''></img>
       </div>
     </div>
 
