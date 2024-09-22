@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import MyContext from './context/MyContext';
 import NavBar from './components/NavBar';
 import Skeleton from './components/Skeleton';
 
 const App = () => {
-  const { rotator, setdivSize,settheme ,  theme, setMobileScreen, setRotator, setOpacity } = useContext(MyContext);
+  const {FullHeight,  rotator, setdivSize,settheme ,  theme, setMobileScreen, setRotator, setOpacity } = useContext(MyContext);
 
   const SCROLL_THRESHOLD = 30;
   const DECIMAL_PLACES = 1;
@@ -16,8 +16,11 @@ const App = () => {
   const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   settheme(!darkMode);
   };
-  
+  const parent = useRef(null)
   useEffect(() => {
+    if(parent.current){
+      parent.current.style.height= FullHeight+'px'
+    }
     detectSystemTheme();
     if (window.innerHeight < window.innerWidth * 0.618033) {
       setdivSize(true);
@@ -99,7 +102,9 @@ const App = () => {
   // };
 
   return (
-    <div className={`${theme ? 'AnimatorGradientLight' : 'AnimatorGradientDark'} mainDiv h-screen w-screen overflow-hidden text-white relative`}>
+    <div
+    ref={parent}
+     className={`${theme ? 'AnimatorGradientLight' : 'AnimatorGradientDark'} mainDiv w-screen overflow-hidden text-white relative`}>
       <NavBar />
       {/* <button
         onClick={() => {

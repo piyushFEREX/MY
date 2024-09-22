@@ -6,7 +6,7 @@ const Toggle = ({size}) => {
   const {theme,settheme}= useContext(MyContext)
 
   return (
-    <StyledWrapper size={size}>
+    <StyledWrapper size={size} className="">
       <label className="theme-switch">
         <input type="checkbox" className="theme-switch__checkbox" onChange={()=>settheme(!theme)} checked={!theme} />
         <div className="theme-switch__container">
