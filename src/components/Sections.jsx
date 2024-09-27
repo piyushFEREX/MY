@@ -5,7 +5,7 @@ const Sections = () => {
     const{MobileScreen,Opacity}=useContext(MyContext)
 
   return (
-    <><div className={`${MobileScreen ? 'rounded-tr-full' : 'rounded-tl-full'} bg-black ${Opacity ? 'flex' : 'hidden'} h-full w-full z-50 bg-opacity-20 bg-black absolute top-0 left-0`}></div></>
+    <><div className={`${MobileScreen ? 'rounded-tl-full' : 'rounded-tl-full'} bg-black ${Opacity ? 'flex' : 'hidden'} h-full w-full z-50 bg-opacity-20 bg-black absolute top-0 left-0`}></div></>
   )
 }
 
