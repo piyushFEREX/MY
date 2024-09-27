@@ -2,13 +2,14 @@ import React, { useContext, useEffect } from 'react';
 import MyContext from '../context/MyContext';
 import Toggle from './Toggle';
 import { RiPhoneLine, RiReactjsLine, RiShareLine, RiUserLine } from '@remixicon/react';
+import HamNav from './HamNav';
 
 const NavBar = () => {
-  const { FullWidth,settogglebutt, landscapeFlotingNav, setlandscapeFlotingNav, FullHeight, MobileScreen } = useContext(MyContext);
+  const { FullWidth,settogglebutt,togglebutt, landscapeFlotingNav, setlandscapeFlotingNav, FullHeight, MobileScreen } = useContext(MyContext);
   const NavWidth = 17; // Standardizing variable naming
 
   useEffect(() => {
-    console.log('MobileScreen:', MobileScreen, 'FullHeight:', FullHeight, 'FullWidth:', FullWidth, 'NavWidth:', NavWidth);
+    console.log('MobileScreen:', MobileScreen, 'FullHeight:', FullHeight, 'FullWidth:', FullWidth, 'NavWidth:', NavWidth,'togglebutt:',togglebutt ,'landscape but:',landscapeFlotingNav);
 
     if (!MobileScreen) {
       const calculatedValue = FullHeight * 1.76 + NavWidth;
@@ -34,9 +35,9 @@ const NavBar = () => {
               height: '100vh',
             }
       }
-      className={`p-2 z-20 absolute right-0 top-0 transition-all duration-500 ease-in-out ${landscapeFlotingNav ? 'transform translate-x-[100%] opacity-0' : 'transform  opacity-100'}`}
+      className={`p-2 z-20 absolute right-0 top-0 transition-all duration-500 ease-in-out ${landscapeFlotingNav ? 'transform translate-x-[100%] ' : 'transform'}`}
     >
-
+      {!MobileScreen ? togglebutt?  <HamNav/>:'':''}
       <div className={`${MobileScreen ? 'flex-row' : 'flex-col'} h-full w-full flex justify-between p-3 glassmorphism rounded-2xl`}>
         <h1 className={`${MobileScreen ? 'items-center border-r py-' : 'justify-center border-b'} border-slate-400 p-2 flex text-xl tracking-wide font-semibold`}>
           Piyush

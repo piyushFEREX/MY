@@ -107,11 +107,13 @@ const App = () => {
     >
      
 
-      {!MobileScreen ? togglebutt?  <HamNav/>:'':''}
+      
 
       <div 
        onClick={()=> setlandscapeFlotingNav(prev => !prev)}
-      className={`h-full w-full absolute z-10 ${!MobileScreen ? landscapeFlotingNav ? 'hidden':'':'hidden'}`}>
+       className={`h-full bg-red-600 bg-opacity-20 w-full absolute z-10 ${
+        !MobileScreen ? (!landscapeFlotingNav ? (togglebutt ? '' : 'hidden')  : 'hidden')  : 'hidden'}`}
+      >
         {/* for closing the nav on outside click  */}
       </div>
       <NavBar />
