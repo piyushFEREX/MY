@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useMemo, useRef } from 'react';
+import { motion } from 'framer-motion'; // Import motion from Framer Motion
 import './sectionStyle.css';
 import MyContext from '../context/MyContext';
 import Sections from './Sections';
@@ -6,7 +7,7 @@ import NeumorphicTile from './NeumorphicTile';
 
 const Skeleton = ({ order }) => {
   const { vibrantDarkColors, vibrantColors, theme, padding, rotator, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
-  const section = useRef(null);
+  const sectionRef = useRef(null);
 
   const iteration = useMemo(() => order + rotator, [order, rotator]);
   const scale = useMemo(() => Math.pow(fixedRatio1, iteration), [fixedRatio1, iteration]);
@@ -18,13 +19,15 @@ const Skeleton = ({ order }) => {
     const adjustedPadding = padding * Math.pow(fixedRatio1, -iteration);
     return `${Math.min(adjustedPadding, padding * order)}rem`;
   }, [order, padding, fixedRatio1, iteration]);
-  
+
   useEffect(() => {
-    if (section.current) {
-      section.current.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+    if (sectionRef.current) {
+      // Animate scale and rotation using Framer Motion
+      sectionRef.current.style.setProperty('--scale', scale);
+      sectionRef.current.style.setProperty('--rotation', rotation);
     }
   }, [scale, rotation]);
-  
+
   // Conditional classes for text, buttons, and images
   const textVisibility = useMemo(() => {
     if (MobileScreen) return rotation < -45 && rotation > -135 ? 'visible rotate-90' : 'hidden';
@@ -47,16 +50,24 @@ const Skeleton = ({ order }) => {
   }, [rotation, MobileScreen]);
 
   return (
-    <div
+    <motion.div
       onClick={() => setRotator(order * -1)}
-      ref={section}
+      ref={sectionRef}
       style={{ padding: calculatedPadding }}
       className={`${MobileScreen ? (rotation < 110 ? '' : 'hidden') : (rotation < -90 ? 'hidden' : '')} ${MobileScreen ? 'custom-transform-origin2' : 'custom-transform-origin1'}`}
+      animate={{
+        scale: scale,
+        rotate: rotation,
+      }}
+      transition={{
+        duration: 0.5,
+        ease: 'easeInOut',
+      }}
     >
       <Sections />
       <div className='h-full w-full rounded-2xl glassmorphism p-0'>
         {/* Text Rotation */}
-        <div className={`${theme ? vibrantColors[order] : vibrantDarkColors[order]} h-full w-full flex justify-center items-center ${MobileScreen ? '':' rotate-[-90deg]'} ${textVisibility}`}>
+        <div className={`${theme ? vibrantColors[order] : vibrantDarkColors[order]} h-full w-full flex justify-center items-center ${MobileScreen ? '' : ' rotate-[-90deg]'} ${textVisibility}`}>
           <h1 className='text-2xl'>Text Here!</h1>
         </div>
 
@@ -86,7 +97,7 @@ const Skeleton = ({ order }) => {
         {/* Image */}
         <img className={`${imageVisibility} h-full w-full object-cover rotate-90`} src={`/images/${order - 2}.gif`} alt='' />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
