@@ -12,7 +12,7 @@ const NavBar = () => {
     console.log('MobileScreen:', MobileScreen, 'FullHeight:', FullHeight, 'FullWidth:', FullWidth, 'NavWidth:', NavWidth,'togglebutt:',togglebutt ,'landscape but:',landscapeFlotingNav);
 
     if (!MobileScreen) {
-      const calculatedValue = FullHeight * 1.76 + NavWidth;
+      const calculatedValue = FullHeight * 1.82+ NavWidth;
       console.log('Calculated value:', calculatedValue);
       if (calculatedValue > FullWidth) {
         setlandscapeFlotingNav(true);
