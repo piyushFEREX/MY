@@ -105,9 +105,7 @@ const App = () => {
       ref={parent}
       className={`${theme ? 'AnimatorGradientLight' : 'AnimatorGradientDark'} mainDiv w-screen overflow-hidden text-white relative`}
     >
-      <button
-       onClick={()=> setlandscapeFlotingNav(prev => !prev)}
-      className='p-4 bg-red-600 text-white z-50 absolute top-0 left-[0%]'>CLICK FOR NAv</button>
+     
 
       {!MobileScreen ? togglebutt?  <HamNav/>:'':''}
 
