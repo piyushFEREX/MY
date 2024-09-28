@@ -7,9 +7,36 @@ import HamNav from './HamNav';
 const NavBar = () => {
   const { FullWidth,settogglebutt,togglebutt, landscapeFlotingNav, setlandscapeFlotingNav, FullHeight, MobileScreen } = useContext(MyContext);
   const NavWidth = 17; // Standardizing variable naming
+  
+
+  const shareData ={
+    title:'mdn',
+    text:'share my portphollio',
+    url:window.location
+  }
+
+  const Sharehandler = async () => {
+    
+    if (navigator.share) {
+      try {
+        const shareData = {
+          title: 'mdn',
+          text: 'Share my portfolio',
+          url: window.location.href,
+        };
+        await navigator.share(shareData);
+       console.log('Shared successfully');
+      } catch (err) {
+        console.log('Error sharing:', err);
+      }
+    } else {
+      window.alert("Web Share API not supported, please use browser's Share Button");
+    }
+  };
+  
 
   useEffect(() => {
-    console.log('MobileScreen:', MobileScreen, 'FullHeight:', FullHeight, 'FullWidth:', FullWidth, 'NavWidth:', NavWidth,'togglebutt:',togglebutt ,'landscape but:',landscapeFlotingNav);
+    console.log('MobileScreen:', MobileScreen, 'FullHeight:', FullHeight, 'FullWidth:', FullWidth, 'NavWidth:', NavWidth,'togglebutt:',togglebutt ,'landscape:',landscapeFlotingNav);
 
     if (!MobileScreen) {
       const calculatedValue = FullHeight * 1.82+ NavWidth;
@@ -19,7 +46,7 @@ const NavBar = () => {
         settogglebutt(true)
       }
     }
-  }, [MobileScreen, FullHeight, FullWidth, NavWidth, setlandscapeFlotingNav]);
+  }, [MobileScreen, NavWidth, setlandscapeFlotingNav]);
 
   return (
     <div
@@ -46,18 +73,23 @@ const NavBar = () => {
         <div className={`${MobileScreen ? 'flex-row w-full justify-evenly items-center' : 'flex-col gap-9 justify-center items-center'} flex`}>
           <Toggle size={MobileScreen ? '8' : NavWidth} />
 
-          <span className={`${MobileScreen ? 'flex-col items-center text-sm w-[30%]' : 'flex-row py-3 px-5'} flex cursor-pointer rounded hover:bg-slate-500 hover:bg-opacity-20`}>
+          <span
+           onClick={()=>{navigator.vibrate(10)}}
+          className={`${MobileScreen ? 'flex-col items-center text-sm w-[30%]' : 'flex-row py-3 px-5'} flex cursor-pointer rounded hover:bg-slate-500 hover:bg-opacity-20`}>
             <RiUserLine />
             <h1>Socials</h1>
           </span>
 
-          <span className={`${MobileScreen ? 'flex-col items-center text-sm w-[30%]' : 'flex-row py-3 px-5'} flex cursor-pointer rounded hover:bg-slate-500 hover:bg-opacity-20`}>
+          <span
+           onClick={()=>{navigator.vibrate(10)}}
+          className={`${MobileScreen ? 'flex-col items-center text-sm w-[30%]' : 'flex-row py-3 px-5'} flex cursor-pointer rounded hover:bg-slate-500 hover:bg-opacity-20`}>
             <RiReactjsLine />
             <h1>Projects</h1>
           </span>
         </div>
 
         <div
+        onClick={()=>Sharehandler()}
           onMouseEnter={(e) => {
             e.currentTarget.classList.add('ButtonGradient');
           }}

@@ -5,7 +5,7 @@ import MyContext from '../context/MyContext';
 import Sections from './Sections';
 import NeumorphicTile from './NeumorphicTile';
 
-const Skeleton = ({ order }) => {
+const Skeleton = ({ order , page }) => {
   const { vibrantDarkColors, vibrantColors, theme, padding, rotator, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
   const sectionRef = useRef(null);
 
@@ -51,7 +51,7 @@ const Skeleton = ({ order }) => {
 
   return (
     <motion.div
-      onClick={() => setRotator(order * -1)}
+      onClick={() => {setRotator(order * -1); navigator.vibrate(10)}}
       ref={sectionRef}
       style={{ padding: calculatedPadding }}
       className={`${MobileScreen ? (rotation < 110 ? '' : 'hidden') : (rotation < -90 ? 'hidden' : '')} ${MobileScreen ? 'custom-transform-origin2' : 'custom-transform-origin1'}`}
@@ -96,6 +96,9 @@ const Skeleton = ({ order }) => {
 
         {/* Image */}
         <img className={`${imageVisibility} h-full w-full object-cover rotate-90`} src={`/images/${order - 2}.gif`} alt='' />
+
+        {/* //the actual page  */}
+        {page ? page :''}
       </div>
     </motion.div>
   );

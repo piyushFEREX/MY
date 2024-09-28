@@ -7,7 +7,7 @@ const MyContextProvider =({children})=>{
     const [loading, setloading] = useState(true)
     const [rotator, setRotator] = useState(0);
     const [Opacity, setOpacity] = useState(false);
-    const [MobileScreen, setMobileScreen] = useState(false)
+    const [MobileScreen, setMobileScreen] = useState(window.innerHeight>window.innerWidth)
     const [theme, settheme] = useState(true)
     const [divSize, setdivSize] = useState(false)
     const [neoTileRotation,setneoTileRotation] = useState()
