@@ -1,130 +1,185 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import MyContext from './context/MyContext';
 import NavBar from './components/NavBar';
 import Skeleton from './components/Skeleton';
+import Intro from './components/pages/Intro';
+import Socials from './components/Socials'
+import Visual from './components/pages/Visual';
+// Utility functions for debounce and throttle
+const debounce = (func, delay) => {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
+
+const throttle = (func, limit) => {
+  let lastFunc;
+  let lastRan;
+  return (...args) => {
+    if (!lastRan) {
+      func(...args);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(() => {
+        if (Date.now() - lastRan >= limit) {
+          func(...args);
+          lastRan = Date.now();
+        }
+      }, limit - (Date.now() - lastRan));
+    }
+  };
+};
 
 const App = () => {
-  const {FullHeight,  rotator, setdivSize,settheme ,  theme, setMobileScreen, setRotator, setOpacity } = useContext(MyContext);
+  const { 
+    togglebutt, setlandscapeFlotingNav, landscapeFlotingNav, setRotator, settheme, 
+    theme, MobileScreen, setMobileScreen, setOpacity 
+  } = useContext(MyContext);
 
   const SCROLL_THRESHOLD = 30;
   const DECIMAL_PLACES = 1;
   const MIN_LIMIT = -7;
   const MAX_LIMIT = 2;
-  
+  const WHEEL_END_TIMEOUT = 300;
+
+  const parent = useRef(null);
+  const touchStartY = useRef(0);
+  const scrollEndTimeout = useRef(null);
+
   // Function to detect system theme
-  const detectSystemTheme = () => {
-  const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  settheme(!darkMode);
-  };
-  const parent = useRef(null)
+  const detectSystemTheme = useCallback(() => {
+    const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    settheme(!darkMode);
+  }, [settheme]);
+
+  // Wheel scroll handling (for desktop)
+  const handleScroll = useCallback((event) => {
+    const delta = event.deltaY;
+    if (Math.abs(delta) >= SCROLL_THRESHOLD) {
+      const increment = Math.sign(delta) * -0.18;
+      setRotator((prevRotator) => {
+        const newValue = Math.min(Math.max(prevRotator + increment, MIN_LIMIT), MAX_LIMIT);
+        return parseFloat(newValue.toFixed(DECIMAL_PLACES));
+      });
+    }
+
+    // Wheel end handling
+    if (scrollEndTimeout.current) clearTimeout(scrollEndTimeout.current);
+    scrollEndTimeout.current = setTimeout(() => {
+      setRotator((prevRotator) => Math.round(prevRotator));
+    }, WHEEL_END_TIMEOUT);
+
+    event.preventDefault();
+  }, [setRotator]);
+
+  // Touch scroll handling (for mobile)
+  const handleTouchStart = useCallback((event) => {
+    touchStartY.current = event.touches[0].clientY;
+  }, []);
+
+  const handleTouchMove = useCallback((event) => {
+    const touchEndY = event.touches[0].clientY;
+    const delta = touchEndY - touchStartY.current;
+
+    // Only update if movement is significant
+    if (Math.abs(delta) >= SCROLL_THRESHOLD) {
+      const increment = Math.sign(delta) * 0.5;
+      setRotator((prevRotator) => {
+        const newValue = Math.min(Math.max(prevRotator + increment, MIN_LIMIT), MAX_LIMIT);
+        return parseFloat(newValue.toFixed(DECIMAL_PLACES));
+      });
+      touchStartY.current = touchEndY;  // Update for next move
+    }
+  }, [setRotator]);
+
+  // Handle touch end (smooth rounding)
+  const handleTouchEnd = useCallback(() => {
+    setRotator((prevRotator) => {
+      const roundedValue = Math.round(prevRotator);
+      return Math.min(Math.max(roundedValue, MIN_LIMIT), MAX_LIMIT);
+    });
+  }, [setRotator]);
+
+  // Key press handler
+  const keyPress = useCallback((event) => {
+    setOpacity(true);
+
+    const isIncrementKey = ['s', 'a', 'S', 'A', 'ArrowDown', 'ArrowLeft'].includes(event.key);
+    const isDecrementKey = ['w', 'd', 'W', 'D', 'ArrowUp', 'ArrowRight'].includes(event.key);
+
+    if (isIncrementKey) {
+      setRotator((prevRotator) => Math.floor(prevRotator + 1));
+    } else if (isDecrementKey) {
+      setRotator((prevRotator) => Math.floor(prevRotator - 1));
+    }
+  }, [setOpacity, setRotator]);
+
+  const keyRelease = useCallback(() => {
+    setOpacity(false);
+  }, [setOpacity]);
+
   useEffect(() => {
-    if(parent.current){
-      parent.current.style.height= FullHeight+'px'
-    }
+    console.log('rerendered');
+
     detectSystemTheme();
-    if (window.innerHeight < window.innerWidth * 0.618033) {
-      setdivSize(true);
+
+    if (parent.current) {
+      parent.current.style.height = '100vh';
     }
+
     if (window.innerWidth < window.innerHeight) {
       setMobileScreen(true);
     }
 
+    // Debounced resize handler
+    const debouncedResize = debounce(() => setMobileScreen(window.innerWidth < window.innerHeight), 200);
+    window.addEventListener('resize', debouncedResize);
 
+    // Throttled scroll and touch handling
+    const throttledHandleScroll = throttle(handleScroll, 100); // Throttle limit can be adjusted
+    const throttledHandleTouchMove = throttle(handleTouchMove, 100); // Throttle limit can be adjusted
 
-  // scroll handing function for wheel event
-    const handleScroll = (event) => {
-      const delta = event.deltaY;
-      if (Math.abs(delta) >= SCROLL_THRESHOLD) {
-        const increment = Math.sign(delta) * -0.1;
-        setRotator((prevRotator) => {
-          const newValue = Math.min(Math.max(prevRotator + increment, MIN_LIMIT), MAX_LIMIT);
-          return parseFloat(newValue.toFixed(DECIMAL_PLACES));
-        });
-      } else {
-        setRotator((prevRotator) => Math.round(prevRotator));
-      }
-      event.preventDefault();
-    };
-
-    const keyPress = (event) => {
-      setOpacity(true);
-      if (
-        (event.key === 'w' || event.key === 'd' || event.key === 'W' || event.key === 'D' || event.key === 'ArrowUp' || event.key === 'ArrowRight') &&
-        rotator > MIN_LIMIT
-      ) {
-        setRotator((prevRotator) => prevRotator - 1);
-      } else if (
-        (event.key === 's' || event.key === 'a' || event.key === 'S' || event.key === 'A' || event.key === 'ArrowDown' || event.key === 'ArrowLeft') &&
-        rotator < MAX_LIMIT
-      ) {
-        setRotator((prevRotator) => prevRotator + 1);
-      }
-    };
-
-    const keyRelease = () => {
-      setOpacity(false);
-    };
-
-    window.addEventListener('wheel', handleScroll, { passive: false });
+    window.addEventListener('wheel', throttledHandleScroll, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', throttledHandleTouchMove, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd);
     window.addEventListener('keydown', keyPress);
     window.addEventListener('keyup', keyRelease);
 
     return () => {
-      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('resize', debouncedResize);
+      window.removeEventListener('wheel', throttledHandleScroll);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', throttledHandleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
       window.removeEventListener('keydown', keyPress);
       window.removeEventListener('keyup', keyRelease);
     };
-  }, [rotator, setdivSize, setMobileScreen, setRotator, setOpacity]);
+  }, [detectSystemTheme, handleScroll, handleTouchStart, handleTouchMove, keyPress, keyRelease]);
 
-  // const openFullscreen = () => {
-  //   const elem = document.documentElement;
-  //   if (elem.requestFullscreen) {
-  //     elem.requestFullscreen();
-  //   } else if (elem.mozRequestFullScreen) {
-  //     elem.mozRequestFullScreen();
-  //   } else if (elem.webkitRequestFullscreen) {
-  //     elem.webkitRequestFullscreen();
-  //   } else if (elem.msRequestFullscreen) {
-  //     elem.msRequestFullscreen();
-  //   }
-  // };
-
-  // const closeFullscreen = () => {
-  //   if (document.exitFullscreen) {
-  //     document.exitFullscreen();
-  //   } else if (document.mozCancelFullScreen) {
-  //     document.mozCancelFullScreen();
-  //   } else if (document.webkitExitFullscreen) {
-  //     document.webkitExitFullscreen();
-  //   } else if (document.msExitFullscreen) {
-  //     document.msExitFullscreen();
-  //   }
-  // };
+  // Simulated content
+  const arr = [...Array(6)];
+  arr.unshift(<Intro />);
+  arr.unshift(<Visual/>)
 
   return (
     <div
-    ref={parent}
-     className={`${theme ? 'AnimatorGradientLight' : 'AnimatorGradientDark'} mainDiv w-screen overflow-hidden text-white relative`}>
-      <NavBar />
-      {/* <button
-        onClick={() => {
-          if (document.fullscreenElement) {
-            closeFullscreen();
-          } else {
-            openFullscreen();
-          }
-        }}
-        className="absolute z-40 top-4 right-4 bg-blue-500 text-white p-2 rounded"
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      ref={parent}
+      className={`${theme ? 'AnimatorGradientLight' : 'AnimatorGradientDark'} mainDiv w-screen overflow-hidden text-white relative`}
+    >
+      <div
+        onClick={() => setlandscapeFlotingNav(prev => !prev)}
+        className={`h-full bg-red-600 bg-opacity-20 w-full absolute z-10 ${
+          !MobileScreen ? (!landscapeFlotingNav ? (togglebutt ? '' : 'hidden') : 'hidden') : 'hidden'}`}
       >
-        Toggle Fullscreen
-      </button> */}
-      <Skeleton order={0} />
-      <Skeleton order={1} />
-      <Skeleton order={2} />
-      <Skeleton order={3} />
-      <Skeleton order={4} />
-      <Skeleton order={5} />
-      <Skeleton order={6} />
+      </div>
+      <NavBar />
+      {arr.map((_, i) => (<Skeleton order={i} page={_} key={i}/>))}
     </div>
   );
 };

@@ -1,3 +1,15 @@
+html,
+body {
+    overscroll-behavior-y: contain;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
 .custom-transform-origin1 {
   --transform-origin-x: calc(100vh * 1.1702);
   --transform-origin-y: calc(100vh * 0.7238);
@@ -5,28 +17,19 @@
   height: 100vh;
   width: 100vh;
   position: absolute;
-  transition: transform 0.3s;
+  /* transition: transform 0.3s; */
 }
 
 .custom-transform-origin2 {
   height: 100vw;
   width: 100vw;
-  --transform-origin-x: calc(100vw * 0.2772);
+  --transform-origin-x: calc(100vw - (100vw * 0.2772));
   --transform-origin-y: calc(100vw * 1.1699);
   transform-origin: var(--transform-origin-x) var(--transform-origin-y);
   position: absolute;
-  transition: transform 0.2s;
+  /* transition: transform 0.2s; */
 }
 
-/* Font-face declaration for custom fonts */
-@font-face {
-  font-family: 'MyFontFamily';
-  src: url('../assets/Quicksand-Bold.ttf') format('truetype'); /* Use forward slashes for consistency */
-}
-
-.customFont {
-  font-family: 'MyFontFamily', sans-serif;
-}
 
 /* Linear gradient animation for light theme */
 .AnimatorGradientLight {
@@ -61,7 +64,6 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Light border to enhance frosted effect */
   overflow: hidden;
-  padding: 1rem;
 }
 
 /* Enhanced glassmorphism gradient */
@@ -70,80 +72,7 @@
   backdrop-filter: blur(15px);
 }
 
-
-
-.custom-transform-origin1 {
-  --transform-origin-x: calc(100vh * 1.1702);
-  --transform-origin-y: calc(100vh * 0.7238);
-  transform-origin: var(--transform-origin-x) var(--transform-origin-y);
-  height: 100vh;
-  width: 100vh;
-  position: absolute;
-  transition: transform 0.3s;
-}
-
-.custom-transform-origin2 {
-  height: 100vw;
-  width: 100vw;
-  --transform-origin-x: calc(100vw * 0.2772);
-  --transform-origin-y: calc(100vw * 1.1699);
-  transform-origin: var(--transform-origin-x) var(--transform-origin-y);
-  position: absolute;
-  transition: transform 0.2s;
-}
-
-/* Font-face declaration for custom fonts */
-@font-face {
-  font-family: 'MyFontFamily';
-  src: url('../assets/Quicksand-Bold.ttf') format('truetype'); /* Use forward slashes for consistency */
-}
-
-.customFont {
-  font-family: 'MyFontFamily', sans-serif;
-}
-
-/* Linear gradient animation for light theme */
-.AnimatorGradientLight {
-  background: linear-gradient(135deg, #6a11cb, #2575fc, #ff6f61, #ffcc70);
-  background-size: 300% 300%;
-  animation: GradientAnimation 13s ease infinite;
-}
-
-/* Linear gradient animation for dark theme */
-.AnimatorGradientDark {
-  background: linear-gradient(135deg, #2d3a6f, #4b2d77, #8a2b8c, #e94f6f);
-  background-size: 300% 300%;
-  animation: GradientAnimation 13s ease infinite;
-}
-
-@keyframes GradientAnimation {
-  0% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
-}
-
-/* Glassmorphism styles */
-.glassmorphism {
-  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
-  backdrop-filter: blur(10px); /* Blur effect */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border to enhance frosted effect */
-  overflow: hidden;
-  padding: 1rem;
-}
-
-/* Enhanced glassmorphism gradient */
-.glassmorphism-gradient {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
-  backdrop-filter: blur(15px);
-}
-
+/* Gradient button animation */
 .ButtonGradient {
   background: linear-gradient(135deg, #ff5722, #9c27b0, #2196f3, #ffeb3b);
   background-size: 200% 200%;
@@ -162,14 +91,7 @@
   100% { background-position: 0% 50%; }
 }
 
-
-
-
-
-
-
-
-/* Commented checker code, preserving original values */
+/* Commented checker code for debugging */
 /* .checker {
   height: 20px;
   width: 20px;
@@ -186,35 +108,3 @@
 /* Old value with width calculation 
 --transform-origin-x: calc(100vw * 0.618033 * 1.1699);
 --transform-origin-y: calc(100vw * 0.618033 * 0.7228); */
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Commented checker code, preserving original values */
-/* .checker {
-  height: 20px;
-  width: 20px;
-  background-color: red;
-  position: absolute;
-  z-index: 999;
-  top: calc(100vh * 0);
-  left: calc(100vh * 1.4699);
-}
-
---transform-origin-x: calc(100vh * 1.1702);
---transform-origin-y: calc(100vh * 0.7238); */
-
-/* Old value with width calculation 
---transform-origin-x: calc(100vw * 0.618033 * 1.1699);
---transform-origin-y: calc(100vw * 0.618033 * 0.7228); */
-
-

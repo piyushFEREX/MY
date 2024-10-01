@@ -35,11 +35,13 @@ const NeumorphicTile = ({ light, prev, visible, theme, size, padding, rotation }
     e.stopPropagation(); // Prevent click event from propagating
     if (prev) {
       if (rotator < 2) {
-        setRotator(rotator + 1);
+        navigator.vibrate(10)
+        setRotator(preVal => Math.floor(preVal+1));
       }
     } else {
       if (rotator > -7) {
-        setRotator(rotator - 1);
+        navigator.vibrate(10)
+        setRotator(preVal => Math.floor(preVal-1));
       }
     }
   };

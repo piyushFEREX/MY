@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import MyContext from "./MyContext";
 
 const MyContextProvider =({children})=>{
+    const [togglebutt, settogglebutt] = useState(false)
+    const [landscapeFlotingNav, setlandscapeFlotingNav] = useState(false)
+    const [loading, setloading] = useState(true)
     const [rotator, setRotator] = useState(0);
     const [Opacity, setOpacity] = useState(false);
-    const [MobileScreen, setMobileScreen] = useState(false)
+    const [MobileScreen, setMobileScreen] = useState(window.innerHeight>window.innerWidth)
     const [theme, settheme] = useState(true)
     const [divSize, setdivSize] = useState(false)
     const [neoTileRotation,setneoTileRotation] = useState()
+    const [resized, setresized] = useState(false)
     const FullHeight = window.innerHeight;
+    const FullWidth = window.innerWidth;
     const fixedRatio1 = 0.618033;
     const padding = .3;
     const vibrantColors = [
@@ -33,6 +38,7 @@ const MyContextProvider =({children})=>{
     return(
         <MyContext.Provider
         value={{
+            FullWidth,
             FullHeight,
             vibrantDarkColors,
             neoTileRotation,
@@ -44,6 +50,14 @@ const MyContextProvider =({children})=>{
             MobileScreen,
             Opacity,
             divSize,
+            resized,
+            loading,
+            landscapeFlotingNav,
+            togglebutt,
+            settogglebutt,
+            setlandscapeFlotingNav,
+            setloading,
+            setresized,
             setneoTileRotation,
             settheme,
             setdivSize,
