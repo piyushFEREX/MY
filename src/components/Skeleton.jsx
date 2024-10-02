@@ -6,7 +6,7 @@ import Sections from './Sections';
 import NeumorphicTile from './NeumorphicTile';
 
 const Skeleton = ({ order , page }) => {
-  const { vibrantDarkColors, vibrantColors, theme, padding, rotator, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
+  const { vibrantDarkColors,FullHeight, vibrantColors, theme, padding, rotator, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
   const sectionRef = useRef(null);
 
   const iteration = useMemo(() => order + rotator, [order, rotator]);
@@ -51,6 +51,7 @@ const Skeleton = ({ order , page }) => {
 
   return (
     <motion.div
+      
       onClick={() => {setRotator(order * -1); navigator.vibrate(10)}}
       ref={sectionRef}
       style={{ padding: calculatedPadding }}

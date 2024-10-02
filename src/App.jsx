@@ -36,7 +36,7 @@ const throttle = (func, limit) => {
 const App = () => {
   const { 
     togglebutt, setlandscapeFlotingNav, landscapeFlotingNav, setRotator, settheme, 
-    theme, MobileScreen, setMobileScreen, setOpacity 
+    theme, MobileScreen, setMobileScreen, setOpacity ,FullHeight
   } = useContext(MyContext);
 
   const SCROLL_THRESHOLD = 30;
@@ -163,7 +163,7 @@ const App = () => {
   // Simulated content
   const arr = [...Array(6)];
   arr.unshift(<Intro />);
-  arr.unshift(<Visual/>)
+  arr.unshift(<Visual height={FullHeight}/>)
 
   return (
     <div
