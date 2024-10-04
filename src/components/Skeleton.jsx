@@ -54,7 +54,7 @@ const Skeleton = ({ order , page }) => {
       onClick={() => {setRotator(order * -1); navigator.vibrate(10)}}
       ref={sectionRef}
       style={{ padding: calculatedPadding }}
-      className={`${MobileScreen ? (rotation < 110 ? '' : 'hidden') : (rotation < -90 ? 'hidden' : '')} ${MobileScreen ? 'custom-transform-origin2' : 'custom-transform-origin1'}`}
+      className={`${MobileScreen ? (rotation < 115 ? '' : 'hidden') : (rotation < -110 ? 'hidden' : '')} ${MobileScreen ? 'custom-transform-origin2' : 'custom-transform-origin1'}`}
       animate={{
         scale: scale,
         rotate: rotation,
