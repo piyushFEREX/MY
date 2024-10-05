@@ -6,7 +6,7 @@ import Sections from './Sections';
 import NeumorphicTile from './NeumorphicTile';
 
 const Skeleton = ({ order , page }) => {
-  const { vibrantDarkColors,FullHeight, vibrantColors, theme, padding, rotator, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
+  const {NextPage, vibrantDarkColors,NextContent, vibrantColors, theme, padding, rotator, fixedRatio1, MobileScreen, setRotator } = useContext(MyContext);
   const sectionRef = useRef(null);
 
   const iteration = useMemo(() => order + rotator, [order, rotator]);
@@ -69,7 +69,7 @@ const Skeleton = ({ order , page }) => {
       <div className='h-full w-full rounded-2xl glassmorphism p-0'>
         {/* Text Rotation */}
         <div className={`${theme ? vibrantColors[order] : vibrantDarkColors[order]} h-full w-full flex justify-center items-center ${MobileScreen ? '' : ' rotate-[-90deg]'} ${textVisibility}`}>
-          <h1 className='text-2xl'>Text Here!</h1>
+        {NextContent[order]}
         </div>
 
         {/* Next Button */}

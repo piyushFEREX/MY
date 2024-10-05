@@ -162,8 +162,8 @@ const App = () => {
 
   // Simulated content
   const arr = [...Array(6)];
-  arr.unshift(<Intro />);
-  arr.unshift(<Visual height={FullHeight}/>)
+  arr.unshift(<Visual order={0} height={FullHeight}/>)
+  arr.unshift(<Intro msg={'Keep Scrolling'} />);
 
   return (
     <div

@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import MyContext from '../../context/MyContext'
 
 const Intro = () => {
+  const {setRotator}= useContext(MyContext)
+  useEffect(()=>{
+    console.log('chl rha haio asdfasdf');
+    
+  },[setRotator])
   return (
     <div className='h-full w-full p-6 relative'>
      <h1 className='mt-4 font-sans font-bold text-7xl'>HELLO</h1>    

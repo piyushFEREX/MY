@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import MyContext from "./MyContext";
+import Stack from "../components/Stack";
+import Socials from "../components/Socials";
 
 const MyContextProvider =({children})=>{
     const [togglebutt, settogglebutt] = useState(false)
@@ -34,7 +36,22 @@ const MyContextProvider =({children})=>{
         'bg-cyan-500',  // Vibrant cyan for a refreshing feel
         'bg-indigo-500' // Lively indigo for depth and richness
       ];
-      
+      const VideoPageContent=[
+        {
+            VidSrc:'https://videos.pexels.com/video-files/5538137/5538137-hd_1920_1080_25fps.mp4',
+            live:false,
+            description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet ornare gravida. Phasellus dolor quam, viverra eget urna et, luctus consequat justo. Mauris at felis a tortor faucibus maximus.',
+            link:'',
+            Heading:'Angry Bird🐥',
+        }
+      ]
+
+      //ye dikha rha hai ki next tile pe kya ky aaane wala hai,
+      const NextContent=[
+        <h1 className="text-3xl">Keep Scrolling😃🖱️</h1>,
+        <Socials size={MobileScreen? 20 : 30}/>,
+        <Stack heading={'Angry Bird'}/>,
+      ]
     return(
         <MyContext.Provider
         value={{
@@ -54,6 +71,8 @@ const MyContextProvider =({children})=>{
             loading,
             landscapeFlotingNav,
             togglebutt,
+            VideoPageContent,
+            NextContent,
             settogglebutt,
             setlandscapeFlotingNav,
             setloading,
