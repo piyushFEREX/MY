@@ -50,7 +50,7 @@ const MyContextProvider =({children})=>{
       const NextContent=[
         <h1 className="text-3xl">Keep Scrolling😃🖱️</h1>,
         <Socials size={MobileScreen? 20 : 30}/>,
-        <Stack heading={'Angry Bird'}/>,
+        <Stack heading={'Angry Bird'} tech={['ejs','mongoDB','nodeJSd','passportJS']}/>,
       ]
     return(
         <MyContext.Provider
