@@ -96,7 +96,7 @@ const Skeleton = ({ order , page }) => {
         />
 
         {/* Image */}
-        <img className={`${imageVisibility} h-full w-full object-cover rotate-90`} src={`/images/${order - 2}.gif`} alt='' />
+        <img className={`${imageVisibility} h-full w-full object-cover rotate-90`} src={`public/images/${order - 2}.gif`} alt='' />
 
         {/* //the actual page  */}
         {page ? page :''}
