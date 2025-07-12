@@ -172,9 +172,10 @@ const App = () => {
       ref={parent}
       className={`${theme ? 'AnimatorGradientLight' : 'AnimatorGradientDark'} mainDiv w-screen overflow-hidden text-white relative`}
     >
+      {/* //this is the overlay div that collapses the nav bar when clicked outside */}
       <div
         onClick={() => setlandscapeFlotingNav(prev => !prev)}
-        className={`h-full bg-red-600 bg-opacity-20 w-full absolute z-10 ${
+        className={`h-full bg-opacity-20 w-full absolute z-10 ${
           !MobileScreen ? (!landscapeFlotingNav ? (togglebutt ? '' : 'hidden') : 'hidden') : 'hidden'}`}
       >
       </div>

@@ -38,19 +38,19 @@ const MyContextProvider =({children})=>{
       ];
       const VideoPageContent=[
         {
-            VidSrc:'https://videos.pexels.com/video-files/5538137/5538137-hd_1920_1080_25fps.mp4',
-            live:false,
-            description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque laoreet ornare gravida. Phasellus dolor quam, viverra eget urna et, luctus consequat justo. Mauris at felis a tortor faucibus maximus.',
-            link:'',
-            Heading:'Angry Bird🐥',
+VidSrc:'https://dms.licdn.com/playlist/vid/v2/D4D05AQGUGl9zJiaBtA/mp4-720p-30fp-crf28/mp4-720p-30fp-crf28/0/1694967169715?e=1752915600&v=beta&t=XIq4SabJMDPMNswBMz7zWRqAUQFmMGL93T4xG-aclPY',
+live:false,
+description:`Apologies for the inconvenience. Although I currently pursue development as a hobby alongside my existing commitments, I'm genuinely passionate about it and eager to take the next step. I'm actively looking for opportunities to turn this passion into a full-time role`,
+link:'https://www.linkedin.com/posts/piyush7web_flappybird-gamedev-fullstackdev-activity-7109207743638454272-YQHu?utm_source=share&utm_medium=member_desktop&rcm=ACoAADjZrKcBFHti34PLdu5K1Enph4nRdDfOtXY',
+Heading:'Angry Bird🐥',
         }
       ]
 
       //ye dikha rha hai ki next tile pe kya ky aaane wala hai,
       const NextContent=[
-        <h1 className="text-3xl">Keep Scrolling😃🖱️</h1>,
+        <h1 className="text-3xl text-center font-semibold">Keep Scrolling😃🖱️<br/><br/>or use the buttons  🔼🔽</h1>,
         <Socials size={MobileScreen? 20 : 30}/>,
-        <Stack heading={'Angry Bird'} tech={['ejs','mongoDB','nodeJSd','passportJS']}/>,
+        <Stack heading={'Angry Bird'} tech={['EJS','MongoDB','Node','Passport']}/>,
       ]
     return(
         <MyContext.Provider

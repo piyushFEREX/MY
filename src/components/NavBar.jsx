@@ -5,7 +5,7 @@ import { RiPhoneLine, RiReactjsLine, RiShareLine, RiUserLine } from '@remixicon/
 import HamNav from './HamNav';
 
 const NavBar = () => {
-  const { FullWidth,settogglebutt,togglebutt, landscapeFlotingNav, setlandscapeFlotingNav, FullHeight, MobileScreen } = useContext(MyContext);
+  const { FullWidth,settogglebutt,togglebutt, landscapeFlotingNav, setlandscapeFlotingNav, FullHeight, MobileScreen, setRotator } = useContext(MyContext);
   const NavWidth = 17; // Standardizing variable naming
   
 
@@ -74,7 +74,7 @@ const NavBar = () => {
           <Toggle size={MobileScreen ? '8' : NavWidth} />
 
           <span
-           onClick={()=>{navigator.vibrate(10)}}
+           onClick={()=>{navigator.vibrate(10); setRotator(0)}}
           className={`${MobileScreen ? 'flex-col items-center text-sm w-[30%]' : 'flex-row py-3 px-5'} flex cursor-pointer rounded hover:bg-slate-500 hover:bg-opacity-20`}>
             <RiUserLine />
             <h1>Socials</h1>
